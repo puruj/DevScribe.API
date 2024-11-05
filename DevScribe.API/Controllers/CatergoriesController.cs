@@ -1,6 +1,7 @@
 ﻿using DevScribe.API.Data;
 using DevScribe.API.Models.Domain;
 using DevScribe.API.Models.DTO;
+using DevScribe.API.Reposotories.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,11 +12,11 @@ namespace DevScribe.API.Controllers
     [ApiController]
     public class CatergoriesController : ControllerBase
     {
-        private readonly ApplicationDBContext applicationDBContext;
+        private readonly ICategoryRepository categoryRepository;
 
-        public CatergoriesController(ApplicationDBContext applicationDBContext)
+        public CatergoriesController(ICategoryRepository categoryRepository)
         {
-            this.applicationDBContext = applicationDBContext;
+            this.categoryRepository = categoryRepository;
         }
 
         //
@@ -29,8 +30,7 @@ namespace DevScribe.API.Controllers
                 UrlHandle = request.UrlHandle
             };
 
-            await applicationDBContext.Categories.AddAsync(category);
-            await applicationDBContext.SaveChangesAsync();
+            await categoryRepository.CreateAsync(category);
 
             //Don't want to return Domain Model so must map Domain Model to DTO
             var response = new CategoryDto

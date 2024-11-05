@@ -1,4 +1,6 @@
 using DevScribe.API.Data;
+using DevScribe.API.Reposotories.Implementation;
+using DevScribe.API.Reposotories.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DevScribeConnectionString"));
 });
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
