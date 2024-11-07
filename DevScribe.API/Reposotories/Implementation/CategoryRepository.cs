@@ -1,6 +1,7 @@
 ﻿using DevScribe.API.Data;
 using DevScribe.API.Models.Domain;
 using DevScribe.API.Reposotories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevScribe.API.Reposotories.Implementation
 {
@@ -19,6 +20,11 @@ namespace DevScribe.API.Reposotories.Implementation
             await applicationDBContext.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<IEnumerable<Category>> GetAllAsync()
+        {
+            return await applicationDBContext.Categories.ToListAsync();
         }
     }
 }

@@ -19,7 +19,6 @@ namespace DevScribe.API.Controllers
             this.categoryRepository = categoryRepository;
         }
 
-        //
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto request)
         {
@@ -39,6 +38,26 @@ namespace DevScribe.API.Controllers
                 Name = category.Name,
                 UrlHandle = category.UrlHandle
             };
+
+            return Ok(response);
+        }
+
+        // GET: https://localhost:7036/api/Catergories
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var categories = await categoryRepository.GetAllAsync();
+
+            //Map domain model to DTO
+            var response = new List<CategoryDto>();
+            foreach (var category in categories)
+            {
+                response.Add(new CategoryDto { 
+                    Id = category.Id, 
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle
+                });
+            }
 
             return Ok(response);
         }
