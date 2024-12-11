@@ -31,5 +31,19 @@ namespace DevScribe.API.Reposotories.Implementation
         {
            return await applicationDBContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task<Category?> UpdateAsync(Category category)
+        {
+            var existingCategory = await applicationDBContext.Categories.FirstOrDefaultAsync(x =>x.Id == category.Id);
+
+            if (existingCategory != null)
+            {
+                applicationDBContext.Entry(existingCategory).CurrentValues.SetValues(category);
+                await applicationDBContext.SaveChangesAsync();
+                return category;
+            }
+
+            return null;
+        }
     }
 }
