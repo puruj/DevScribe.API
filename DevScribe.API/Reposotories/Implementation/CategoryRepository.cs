@@ -26,5 +26,10 @@ namespace DevScribe.API.Reposotories.Implementation
         {
             return await applicationDBContext.Categories.ToListAsync();
         }
+
+        public async Task<Category?> GetById(Guid id)
+        {
+           return await applicationDBContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }
