@@ -22,6 +22,20 @@ namespace DevScribe.API.Reposotories.Implementation
             return category;
         }
 
+        public async Task<Category?> DeleteAsync(Guid id)
+        {
+            var existingCategory = await applicationDBContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingCategory == null)
+            {
+                return null;
+            }
+
+            applicationDBContext.Categories.Remove(existingCategory);
+            await applicationDBContext.SaveChangesAsync();
+            return existingCategory;
+        }
+
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             return await applicationDBContext.Categories.ToListAsync();

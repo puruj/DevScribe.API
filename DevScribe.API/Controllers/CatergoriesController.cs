@@ -114,5 +114,28 @@ namespace DevScribe.API.Controllers
 
             return Ok(response);
         }
+
+        //DELETE: https://localhost:7036/api/catergories/{id}
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteCatagory([FromRoute] Guid id)
+        {
+            var category = await categoryRepository.DeleteAsync(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            //Convert Domain model to DTO
+            var response = new CategoryDto
+            {
+                Id = category.Id,
+                Name = category.Name,
+                UrlHandle = category.UrlHandle
+            };
+
+            return Ok(response);
+        }
     }
 }
