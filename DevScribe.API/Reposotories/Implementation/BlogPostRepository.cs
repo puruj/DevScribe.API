@@ -1,6 +1,7 @@
 ﻿using DevScribe.API.Data;
 using DevScribe.API.Models.Domain;
 using DevScribe.API.Reposotories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace DevScribe.API.Reposotories.Implementation
 {
@@ -18,6 +19,11 @@ namespace DevScribe.API.Reposotories.Implementation
             await dBContext.BlogPosts.AddAsync(blogPost);
             await dBContext.SaveChangesAsync();
             return blogPost;
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetAllAsync()
+        {
+            return await dBContext.BlogPosts.ToListAsync();
         }
     }
 }
