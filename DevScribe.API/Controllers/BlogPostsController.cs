@@ -26,7 +26,7 @@ namespace DevScribe.API.Controllers
             {
                 Author = request.Author,
                 Content = request.Content,
-                FeaturedUImageUrl = request.FeaturedUImageUrl,
+                FeaturedImageUrl = request.FeaturedImageUrl,
                 IsVisible = request.IsVisible,
                 PublishedDate = request.PublishedDate,
                 Description = request.Description,
@@ -42,7 +42,7 @@ namespace DevScribe.API.Controllers
                 Id = blogPost.Id,
                 Author = blogPost.Author,
                 Content = blogPost.Content,
-                FeaturedUImageUrl = blogPost.FeaturedUImageUrl,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
                 IsVisible = blogPost.IsVisible,
                 PublishedDate = blogPost.PublishedDate,
                 Description = blogPost.Description,
