@@ -40,6 +40,7 @@ namespace DevScribe.API.Controllers
             var respone = new BlogPostDto
             {
                 Id = blogPost.Id,
+                Author = blogPost.Author,
                 Content = blogPost.Content,
                 FeaturedUImageUrl = blogPost.FeaturedUImageUrl,
                 IsVisible = blogPost.IsVisible,
